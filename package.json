@@ -4,9 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "autoprefixer": "^10.4.8",
+    "csso-cli": "^4.0.1",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
     "sass": "^1.54.0"
   },
   "scripts": {
-    "compile": "sass --watch main.scss styles/main.css"
+    "compile": "sass --watch main.scss styles/main.css",
+    "build:compile": "sass --no-source-map main.scss build/compiled.css",
+    "build:prefix": "postcss build/compiled.css -o build/prefixed.css --use autoprefixer",
+    "build:minify": "csso build/prefixed.css -o build/minified.css",
+    "build": "npm run build:compile && npm run build:prefix && npm run build:minify"
   }
 }
